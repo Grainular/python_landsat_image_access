@@ -9,9 +9,9 @@ password = 'farmlink123!!'
 api = API(username, password)
 
 # Define your search parameters: Landsat 8, Path/Row values, date range
-landsat_mission = 'LANDSAT_ETM_C1'
-latitude = 34.05   # Example latitude (Los Angeles)
-longitude = -118.25 # Example longitude (Los Angeles)
+landsat_mission = 'landsat_ot_c2_l1'
+latitude = 45.0   # Example latitude (Los Angeles)
+longitude = -63.0 # Example longitude (Los Angeles)
 start_date = '2022-01-01'
 end_date = '2022-12-31'
 
@@ -27,7 +27,9 @@ scenes = api.search(
 
 # Print the results
 for scene in scenes:
-    print(f"ID: {scene['entityId']}, Acquisition Date: {scene['acquisitionDate']}, Cloud Cover: {scene['cloudCover']}")
+    ee = EarthExplorer(username, password)
+    print(scene['entity_id'])
+    ee.download(scene['entity_id'], output_dir='.')
 
 # Close the API session
 api.logout()
